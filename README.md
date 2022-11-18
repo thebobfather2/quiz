@@ -3,10 +3,18 @@
 ## About Bootcamp Timed Quiz
 Bootcamp Timed Quz is a timed quiz on JavaScript fundamentals that stores high scores which allows me to gauge my progress compared to my peers.
 
-## Instructions
+## Technologies Used
+* jQuery (https://jquery.com/)
+* fontawesome (https://fontawesome.com/)
+* bootstrap (https://getbootstrap.com/)
+
+## User Story
+### AS A coding boot camp student
+### I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
+### SO THAT I can gauge my progress compared to my peers
+
+## Screenshots
 
 
 ## Deployment
 https://thebobfather2.github.io/quiz/
-
-![thebobfather2 github io_passwordgenerator_](https://user-images.githubusercontent.com/107475188/201233723-494e10c6-96ec-4a14-97aa-d2cf2408e0b6.png)

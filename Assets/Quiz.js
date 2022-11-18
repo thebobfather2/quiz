@@ -1,144 +1,290 @@
-// Assignment code here
+// Hides unwanted div
+questionsDiv.style.visibility = 'hidden';
 
-// Get references to the #quiz element
-var quizBtn = document.querySelector("#quiz");
+// Global variables
+var seconds;
+var timerSec = 75;
+var countdown = document.querySelector(".countdown");
+var userScore = 0;
+var displayTimer = 1;
 
-function writePassword() {
-  var passwordLength = 0;
-  var passwordType = {
-    lowercase: false,
-    uppercase: false,
-    numeric: false,
-    specialCharacters: false
-  };
-  var passwordCharacters = "";
-  var passwordResults = "";
+// Questions and answers for quiz in single nestedArray (remove nestedArray)
+myArray = [
+    questOne = ["Commonly used data types DO NOT incldue:", "alerts", 'booleans', "strings", 'numbers'],
+    questTwo = ["The condition in an if / else statement is enclosed within ___.", "quotes", 'curly brackets', "parentheses", 'square brackets'],
+    questThree = ["Arrays in JavaScript can be used to store ___.", "numbers and strings", 'booleans', "other arrays", 'all of the above'],
+    questFour = ["String values must be enclosed within __ when being assigned to variables.", "commas", 'quotes', "curly brackets", 'parentheses'],
+    questFive = ["A very useful tool used during development and debugging for printing content to the debugger is:", "JavaScript", 'terminal/bash', "for loops", 'console.log']    
+]
 
-  // Criteria Prompts Function
-  var generatePassword = function () {
+// Variables for question change
+var questionsArray = [myArray[0][0], myArray[1][0], myArray[2][0], myArray[3][0], myArray[4][0]];
+var questionsArrayIndex = 0;
 
-    // Set length of password
-    passwordLength = window.prompt("How long would you like your password to be? (Must be between 8 to 128 characters.)");
-    passwordLength = parseInt(passwordLength);
+var viewHighScores = document.querySelector('.anchor');
 
-    // Check if input is a number between 8-128
-    if (!passwordLength) {
-      window.alert("Oops! The response you've entered is invalid. Please Try Again.");
-      return
+var correctAns = document.getElementById("correctAns");
+var wrongAns = document.getElementById("wrongAns");
+
+function startQuiz() {
+    // Hides answer check area
+    questionsDiv.style.visibility = 'visible';
+    // Deletes start screen
+    document.getElementById("removeElem").remove();
+    // Shuffles array
+    shuffle(questionsArray);
+    // Gets random question to start game    
+    chooseQuestion();
+    // Populates quiz game
+    populateQuiz();
+    // Starts game timer
+    timerStart();
+}
+
+// Shuffles the questionsArray to provide "unique" experiece per game.
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
     }
-    else if (passwordLength > 128 || passwordLength < 8) {
-      window.alert("Please enter a number between 8-128.")
-      return
-    }
-    // Select character types (lowercase, uppercase, numberic, and/or special charactrs)
-    var passwordCriterea = window.prompt("Using 1 for lowercase, 2 for uppercase, 3 for numeric, and 4 for special characters, please select your password criteria. NOTE: To select multiple critera, do NOT use spaces and list the criteria identifiers in order from least to greatest. For example, lowercase, uppercase, and special character would be entered as 124");
-    passwordCriterea = parseInt(passwordCriterea);
 
-    // Switch statement in dot notation
-    switch (passwordCriterea) {
-      case 1:
-        passwordType.lowercase = true;
-        break;
-      case 2:
-        passwordType.uppercase = true;
-        break;
-      case 3: 
-        passwordType.numeric = true;
-        break;
-      case 4:
-        passwordType.specialCharacters = true;
-        break;
-      case 12:
-        passwordType.lowercase = true;
-        passwordType.uppercase = true;
-        break;
-      case 13:
-        passwordType.lowercase = true;
-        passwordType.numeric = true;
-        break;
-      case 14:
-        passwordType.lowercase = true;
-        passwordType.specialCharacters = true;
-        break;
-      case 23:
-        passwordType.uppercase = true;
-        passwordType.numeric = true;
-        break;
-      case 24:
-        passwordType.uppercase = true;
-        passwordType.specialCharacters = true;
-        break;
-      case 34: 
-        passwordType.numeric = true;
-        passwordType.specialCharacters = true;
-        break;
-      case 123:
-        passwordType.lowercase = true;
-        passwordType.uppercase = true;
-        passwordType.numeric = true;
-        break;
-      case 124:
-        passwordType.lowercase = true;
-        passwordType.uppercase = true;
-        passwordType.specialCharacters = true;
-        break;
-      case 134:
-        passwordType.lowercase = true;
-        passwordType.numeric = true;
-        passwordType.specialCharacters = true;
-        break;
-      case 234:
-        passwordType.uppercase = true;
-        passwordType.numeric = true;
-        passwordType.specialCharacters = true;
-        break;
-      case 1234:
-        passwordType.lowercase = true;
-        passwordType.uppercase = true;
-        passwordType.numeric = true;
-        passwordType.specialCharacters = true;
-        break;
-      default:
-        window.alert("Invalid entry, please carefully read the instructions to select your criteria.")
-        break;
-    };
+    return array;
+}
+
+// Changes to next question
+function chooseQuestion() {
+   
+    randomQuestion = questionsArray[questionsArrayIndex]; 
+
+    return randomQuestion;
+};
+
+// global variable, current question index
+// keeps track of i from for loop
+// 
+
+
+function populateQuiz() {
+
+    if (randomQuestion == myArray[0][0] || randomQuestion == myArray[1][0] || randomQuestion == myArray[2][0] || randomQuestion == myArray[3][0] || randomQuestion == myArray[4][0]) {
+
+        $("#quesBody").text(chooseQuestion());
+        
+    }
+
+    checkAns();
+
+};
+
+
+
+
+function checkAns() {
+    if (randomQuestion == myArray[0][0]) {
+        for (i = 1; i < myArray[0].length; i++) {
+            $("#ans" + i).text(myArray[0][i]);
+        }
+
+    }
+
+    if (randomQuestion == myArray[3][0]) {
+
+        for (i = 1; i < myArray[3].length; i++) {
+            $("#ans" + i).text(myArray[3][i]);
+        }
+
+    }
+
+    if (randomQuestion === myArray[1][0]) {
+
+        for (i = 1; i < myArray[1].length; i++) {
+            $("#ans" + i).text(myArray[1][i]);
+        }
+
+    }
+
+    if (randomQuestion == myArray[2][0]) {
+        for (i = 1; i < myArray[2].length; i++) {
+            $("#ans" + i).text(myArray[2][i]);
+        }
+      
+    }
+
+    if (randomQuestion == myArray[4][0]) {
+        for (i = 1; i < myArray[4].length; i++) {
+            $("#ans" + i).text(myArray[4][i]);
+        }       
+
+    }
+
     
-    // Add possible Character Types
-    if (passwordType.lowercase) {
-      passwordCharacters = "abcdefghijklmnopqrstuvwxyz";
-    };
-    if (passwordType.uppercase) {
-      passwordCharacters = passwordCharacters + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    };
-    if (passwordType.numeric) {
-      passwordCharacters = passwordCharacters + "0123456789";
-    };
-    if (passwordType.specialCharacters) {
-      passwordCharacters = passwordCharacters + "!@#$%^&*?~";
-    };
 
-    // Variable to receive the length of the passwordCharacters
-    var passwordCharacterLength = passwordCharacters.length;
+}
 
-    // Randomly generate password
-    function makePassword () {
-      for (var i = 0; i < passwordLength; i++) {
-        passwordResults += passwordCharacters.charAt(Math.random() * (passwordCharacterLength - 1) + 1);
-      };
-      return passwordResults;
+function nextQuestion() {    
+
+    setTimeout(function(){
+        correctAns.innerText = '';
+    }, 1000);
+
+    setTimeout(function(){
+        wrongAns.innerText = '';
+    }, 1000);
+    
+
+    // next question ot increment global variable 
+    
+    console.log(questionsArrayIndex);
+    // console.log(chooseQuestion());
+
+    if (questionsArrayIndex < 5) {
+        questionsArrayIndex++;
+        chooseQuestion();
+        populateQuiz();
+        console.log(questionsArrayIndex);
     }
-    // Alert Message
-    window.alert("Generating Your Password...")
-    return makePassword();
-  };
 
-  // Write password to the #password input
-    var password = generatePassword();
-    var passwordText = document.querySelector("#password");
+    // Selects next question
+    
+    // Populates quiz game
+    
 
-    passwordText.value = password;
+    
+    if (questionsArrayIndex == 5){
+        finalQuestion();
+    }
+}
 
-  }
+$(".buttons").on('click', function () {
+    console.log($(this));
+    if ($(this)[0].innerText == myArray[0][1] ||
+        $(this)[0].innerText == myArray[3][2] ||
+        $(this)[0].innerText == myArray[1][3] ||
+        $(this)[0].innerText == myArray[2][4] ||
+        $(this)[0].innerText == myArray[4][4]) {
+        console.log($(this)[0].innerText + " right")
+        rightChoice();
+        
+        userScore += 1;
+        // console.log('gj')
+        // console.log(userScore);
 
-  // Add event listener to generate button
-  quizBtn.addEventListener("click", writePassword);
+
+    } else if ($(this)[0].innerText == myArray[0][2] || $(this)[0].innerText == myArray[0][3] || $(this)[0].innerText == myArray[0][4]) {
+        console.log($(this)[0].innerText + " wrong")
+        wrongChoice();
+        
+
+    } else if ($(this)[0].innerText == myArray[1][1] || $(this)[0].innerText == myArray[1][2] || $(this)[0].innerText == myArray[1][4]){
+        console.log($(this)[0].innerText + " wrong")
+        wrongChoice();
+        
+    } else if ($(this)[0].innerText == myArray[2][1] || $(this)[0].innerText == myArray[2][2] || $(this)[0].innerText == myArray[2][3]){
+        console.log($(this)[0].innerText + " wrong")
+        wrongChoice();
+        
+    } else if ($(this)[0].innerText == myArray[3][1] || $(this)[0].innerText == myArray[3][3] || $(this)[0].innerText == myArray[3][4]){     
+        console.log($(this)[0].innerText + " wrong")
+        wrongChoice();
+        
+    } else if ($(this)[0].innerText == myArray[4][1] || $(this)[0].innerText == myArray[4][2] || $(this)[0].innerText == myArray[4][3]){
+        console.log($(this)[0].innerText + " wrong")
+        wrongChoice();
+        
+    }
+
+})
+
+function timerStart() {
+    seconds = setInterval(function () {
+
+        timerSec--;
+        countdown.textContent = timerSec;
+
+        if (timerSec === 0 || timerSec < 1) {
+            clearInterval(seconds);
+            alert("You have run out of time. Game over.");
+            finalQuestion();
+        }
+
+    }, 1000);
+}
+
+
+
+function rightChoice() {
+    correctAns.innerText = "Correct";
+    nextQuestion();
+}
+
+function wrongChoice() {
+    wrongAns.innerText = "Wrong";
+    nextQuestion();  
+    timerSec -= 10;
+    console.log(timerSec);
+}
+
+function finalQuestion() {
+    clearInterval(seconds);
+    $("#quesBody").text("All Done!");
+    document.querySelector(".card-body").append(`Your final score is ${userScore+1}`);
+    var para = document.createElement("p");
+    para.innerText = "Enter your initials: ";
+    document.querySelector(".card-body").appendChild(para);
+    var input = document.createElement("input");
+    input.className = "inputInit mx-auto text-center";
+    document.querySelector(".card-body").appendChild(input);
+    var button = document.createElement("button");
+    button.className = "submit  allButtons mx-auto text-center"
+    button.innerText = "Submit";
+    document.querySelector(".card-body").appendChild(button);
+    document.querySelector(".button-group").remove();
+
+    $(".submit").on('click', function (){
+        submit();
+    })
+}
+
+var saveInput = document.querySelector(".inputInit");
+
+function submit() {
+    event.preventDefault();
+    saveInput;
+    if (localStorage !== null) {
+
+    //create object with user details * {initials: "" highscore: 0}
+    const userObj = {
+        initials: document.querySelector('.inputInit').value,
+        score: userScore
+    }
+
+    //get highscores from localstorage and store in variable
+    info = JSON.parse(localStorage.getItem("score")) || [];
+
+    // //set info to existing or empty []
+    // info = (existing) ? existing 
+
+    //add new user object
+    info.push(userObj);
+
+    localStorage.setItem("score", JSON.stringify(info));
+
+    window.location = viewHighScores;
+    console.log(localStorage.getItem("initials"));
+    // //create an empty object
+    console.log(info.initials);
+
+    
+}
+
+}
