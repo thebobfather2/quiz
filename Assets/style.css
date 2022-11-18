@@ -1,0 +1,95 @@
+.anchor {
+  margin-left: 20px;
+  text-decoration: none;
+  display: inline;
+}
+
+.time {
+  margin-left: 20px;
+  display: inline;
+}
+
+.countdown {
+  margin-left: 20px;
+  display: inline;
+}
+
+.container {
+  text-align: center;
+}
+
+.finalStyle {
+  font-weight: bold;
+  
+}
+
+.finalMessage {
+  display: block;
+  /* float: left; */
+}
+
+.highButtons {
+  display: inline;
+  background-color: rgb(138, 9, 138);
+  color: white;
+  border: none;
+  border-radius: 7%;
+  margin: 3px;
+}
+
+.submit {
+  display: inline;
+  background-color: rgb(9, 82, 138);
+  color: white;
+  border: none;
+  border-radius: 7%;
+  margin: 3px;
+}
+
+.startButton {
+  font-size: 5vh;
+  background-color: rgb(46, 0, 107);
+  color: white;
+  border: double;
+  border-width: 5px;
+  border-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 5px 5px #00000042;
+  margin: 3px;
+  padding: 15px;
+  display: block;
+}
+
+.allButtons {
+  background-color: rgb(34, 159, 255);
+  color: white;
+  border: none;
+  border-radius: 7%;
+  margin: 3px;
+  display: block;
+}
+
+
+.instructions {
+  width: 75%;
+  height: 40px;
+  padding-left: 400px;
+  padding-top: 10px;
+  margin-bottom: 40px;    
+}
+
+.w3-container {
+   text-align: left;     
+}
+
+.buttonStack {
+  display: block;
+  position: relative;
+ left: 2%;
+}
+
+.w3-container h1 {
+  font-size: 25px;
+  font-weight: bold;
+}
+

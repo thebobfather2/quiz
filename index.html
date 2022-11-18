@@ -4,31 +4,67 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Password Generator</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Bootcamp Timed Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="Assets/style.css" />
   </head>
+  
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Password Generator</h1>
-      </header>
-      <div class="card">
-        <div class="card-header">
-          <h2>Generate a Password</h2>
-        </div>
-        <div class="card-body">
-          <textarea
-            readonly
-            id="password"
-            placeholder="Your Secure Password"
-            aria-label="Generated Password"
-          ></textarea>
-        </div>
-        <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
+
+    <div>
+      <a href="./highscores.html" class="anchor">View Highscores</a>
+      <br></br>
+      <p class="time">Time:</p>
+      <br></br>
+      <p class="countdown">0</p>
+      <br></br>
+    </div>
+
+
+    <div class="Card-group  " style="padding: 100px; padding-top: 0px;">
+      <div class="card card-columns"  id="startDiv"> 
+        <div class="card-body  mx-auto" id="removeElem">      
+          <h1 class="card-title mx-auto text-center">Bootcamp Timed Quiz</h1>      
+          <h2 class="card-text text-center" style="font-size: 4vh;">Answer the questions within the time limit - incorrect answers will take 10 seconds off the clock!</h2>
+            <button aria-label="Start Quiz" id="startButton" class="startButton  mx-auto" onclick="startQuiz()">Start Quiz
+              <i class="start" aria-hidden="true"></i>
+            </button>
         </div>
       </div>
+        <div class="card  " id="questionsDiv">
+          <div class="card-body  mx-auto text-center  ">      
+            <h5 class="card-title" id="quesTittle"></h5>      
+            <p class="card-text card-subtitle text-center" id="quesBody">Question</p>
+            <div class="button-group">
+              <button aria-label="ans1" id="ans1" class="buttons allButtons mx-auto">answer1
+                <i class="start" aria-hidden="true"></i>
+              </button>
+              <button aria-label="ans2" id="ans2" class="buttons allButtons mx-auto">answer2
+                <i class="start" aria-hidden="true"></i>
+              </button>
+              <button aria-label="ans3" id="ans3" class="buttons allButtons mx-auto">answer3
+                <i class="start" aria-hidden="true"></i>
+              </button>
+              <button aria-label="ans4" id="ans4" class="buttons allButtons mx-auto">answer4
+                <i class="start" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>    
+      </div>
+      
+        <footer class="card-footer" id="footerDiv">
+          <hr class="horRow">
+            <p class="correct" id="correctAns"></p>
+            <p class="wrong" id="wrongAns"></p>
+        </footer>
+      
     </div>
-    <script src="script.js"></script>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"
+    integrity="sha256-spTpc4lvj4dOkKjrGokIrHkJgNA0xMS98Pw9N7ir9oI=" crossorigin="anonymous"></script>
+    <script src="./Assets/Quiz.js"></script>
+
   </body>
+
 </html>
