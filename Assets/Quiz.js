@@ -17,7 +17,7 @@ myArray = [
     questFive = ["A very useful tool used during development and debugging for printing content to the debugger is:", "JavaScript", 'terminal/bash', "for loops", 'console.log']    
 ]
 
-// Variables for question change
+// Variables for question change - decrease the array each time a question is answered
 var questionsArray = [myArray[0][0], myArray[1][0], myArray[2][0], myArray[3][0], myArray[4][0]];
 var questionsArrayIndex = 0;
 
@@ -41,7 +41,7 @@ function startQuiz() {
     timerStart();
 }
 
-// Shuffles the questionsArray to provide "unique" experiece per game.
+// Shuffles the questionsArray to provide "unique" experiece per game. Uses array arguement as a keyword to access data
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -69,11 +69,7 @@ function chooseQuestion() {
     return randomQuestion;
 };
 
-// global variable, current question index
-// keeps track of i from for loop
-// 
-
-
+// Populate the quiz
 function populateQuiz() {
 
     if (randomQuestion == myArray[0][0] || randomQuestion == myArray[1][0] || randomQuestion == myArray[2][0] || randomQuestion == myArray[3][0] || randomQuestion == myArray[4][0]) {
@@ -141,9 +137,6 @@ function nextQuestion() {
         wrongAns.innerText = '';
     }, 1000);
     
-
-    // next question ot increment global variable 
-    
     console.log(questionsArrayIndex);
     // console.log(chooseQuestion());
 
@@ -153,12 +146,6 @@ function nextQuestion() {
         populateQuiz();
         console.log(questionsArrayIndex);
     }
-
-    // Selects next question
-    
-    // Populates quiz game
-    
-
     
     if (questionsArrayIndex == 5){
         finalQuestion();
@@ -235,7 +222,7 @@ function wrongChoice() {
 }
 
 function finalQuestion() {
-    clearInterval(seconds);
+    //clearInterval(seconds);
     $("#quesBody").text("All Done!");
     document.querySelector(".card-body").append(`Your final score is ${userScore+1}`);
     var para = document.createElement("p");
